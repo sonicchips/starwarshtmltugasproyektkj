@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAR WARS — Sejarah Saga Episode I–VI</title>
+<meta name="description" content="Perjalanan sejarah Star Wars Episode I–VI: sinopsis, opening crawl, poster, dan kisah di balik layar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=News+Cycle:wght@400;700&family=Saira:wght@300;400;600&family=Saira+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ DASAR ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#040407;
+  --ink:#EDEAE0;
+  --mut:#8d887d;
+  --body:#c9c4b7;
+  --yellow:#FFE81F;
+  --line:rgba(255,255,255,.14);
+  --panel:rgba(10,10,15,.55);
+}
+html{color-scheme:dark}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Saira',sans-serif;overflow:hidden;
+}
+::selection{background:var(--yellow);color:#000}
+button{font-family:inherit}
+:focus-visible{outline:1px solid var(--yellow);outline-offset:3px}
+
+/* ============ LATAR BINTANG ============ */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+#ytAudio{position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:0;pointer-events:none}
+
+/* ============ GERBANG MASUK ============ */
+#gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;transition:opacity .8s ease}
+#gate.out{opacity:0;pointer-events:none}
+.gate-inner{max-width:720px}
+.gate-kicker{font:600 .74rem/1 'Saira Condensed';letter-spacing:.4em;color:var(--yellow);margin-bottom:26px}
+.gate-logo{font-family:Anton,sans-serif;font-size:clamp(3.4rem,14vw,10.5rem);line-height:.95;color:var(--yellow);letter-spacing:.02em}
+.gate-desc{margin:30px auto 0;max-width:54ch;font:300 1rem/1.85 'Saira';color:var(--body)}
+#btnStart{display:inline-flex;align-items:center;gap:12px;margin-top:36px;padding:16px 28px;background:none;border:1px solid var(--yellow);color:var(--yellow);font:700 .82rem/1 'Saira Condensed';letter-spacing:.3em;cursor:pointer;transition:.25s}
+#btnStart svg{width:12px;height:12px;fill:currentColor}
+#btnStart:hover{background:var(--yellow);color:#040407}
+.gate-note{margin-top:18px;font:400 .74rem/1.7 'Saira';color:var(--mut)}
+.gate-note b{color:var(--ink);font-weight:600}
+#btnSkipGate{margin-top:20px;background:none;border:none;color:#6f6a61;font:400 .74rem 'Saira';letter-spacing:.06em;cursor:pointer;border-bottom:1px solid transparent;transition:.2s;padding:2px 0}
+#btnSkipGate:hover{color:var(--body);border-bottom-color:var(--line)}
+
+/* ============ AKSI: CRAWL PEMBUKA ============ */
+#crawlScene{position:fixed;inset:0;z-index:90;overflow:hidden;transition:opacity .95s ease}
+#crawlScene.done{opacity:0}
+.c-blue{
+  position:absolute;left:0;right:0;top:36%;text-align:center;
+  color:#4bd5ee;font:400 clamp(1.25rem,3vw,2.1rem)/1.55 'News Cycle',sans-serif;
+  opacity:0;transition:opacity .5s;z-index:3;
+}
+#crawlScene.blue-on .c-blue{opacity:1}
+.c-logo{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;z-index:2;
+}
+.c-logo span{font-family:Anton,sans-serif;font-size:clamp(3.4rem,13vw,10rem);color:var(--yellow);letter-spacing:.02em}
+#crawlScene.logo-on .c-logo{opacity:1;animation:logoOut 5.2s cubic-bezier(.16,.6,.35,1) forwards}
+@keyframes logoOut{0%{transform:scale(1);opacity:1}55%{opacity:1}100%{transform:scale(.05);opacity:0}}
+
+.c-stage{position:absolute;inset:0;overflow:hidden;perspective:400px;perspective-origin:50% 50%;z-index:1}
+.c-plane{
+  position:absolute;left:50%;bottom:-16vh;height:150vh;width:min(1240px,120vw);
+  transform:translateX(-50%) rotateX(60deg);transform-origin:50% 100%;
+  -webkit-mask-image:linear-gradient(to top,#000 42%,transparent 88%);
+  mask-image:linear-gradient(to top,#000 42%,transparent 88%);
+}
+.c-body{
+  position:absolute;left:0;right:0;bottom:0;padding:0 6%;
+  font-family:'News Cycle',sans-serif;font-weight:700;
+  font-size:clamp(1.12rem,1.9vw,1.9rem);line-height:1.62;
+  color:var(--yellow);text-align:justify;
+  transform:translateY(52vh);
+}
+#crawlScene.go .c-body{animation:crawlUp 68s linear forwards}
+@keyframes crawlUp{from{transform:translateY(52vh)}to{transform:translateY(-106%)}}
+.c-ep{font-size:1.35em;text-align:center;letter-spacing:.34em;margin-bottom:.5em}
+.c-hl{font-size:2.1em;line-height:1.05;text-align:center;letter-spacing:.05em;margin-bottom:.65em}
+.c-hs{font-size:1.02em;text-align:center;letter-spacing:.28em;margin-bottom:2.6em}
+.c-body p{margin-bottom:1.65em}
+#btnSkipCrawl{
+  position:absolute;right:22px;bottom:22px;z-index:10;
+  display:inline-flex;align-items:center;gap:10px;padding:11px 16px;
+  background:rgba(6,6,10,.6);border:1px solid var(--line);color:#a7a296;
+  font:600 .68rem/1 'Saira Condensed';letter-spacing:.26em;cursor:pointer;transition:.2s;
+}
+#btnSkipCrawl svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
+#btnSkipCrawl:hover{color:var(--yellow);border-color:var(--yellow)}
+
+/* ============ RANGKA SITUS ============ */
+#topbar,#rail{opacity:0;pointer-events:none;transition:opacity .9s .25s}
+body.ready #topbar,body.ready #rail{opacity:1;pointer-events:auto}
+
+#topbar{
+  position:fixed;top:0;left:0;right:0;z-index:55;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:14px 22px;background:rgba(5,5,9,.55);
+  border-bottom:1px solid var(--line);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex:none}
+.b1{font-family:Anton,sans-serif;color:var(--yellow);font-size:1.02rem;letter-spacing:.05em}
+.b2{font:600 .6rem/1 'Saira Condensed';letter-spacing:.32em;color:var(--mut)}
+#chapterLabel{font:600 .64rem/1.5 'Saira Condensed';letter-spacing:.26em;color:var(--mut);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+#rail{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;
+  display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);
+  background:rgba(6,6,10,.74);border:1px solid var(--line);padding:8px 10px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.edge{width:34px;height:34px;flex:none;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:.2s}
+.edge svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:square}
+.edge:hover:not(:disabled){border-color:var(--yellow);color:var(--yellow)}
+.edge:disabled{opacity:.25;cursor:default}
+.rail-labels{display:flex;gap:1px}
+.rl{position:relative;background:none;border:none;color:var(--mut);cursor:pointer;padding:10px 9px;transition:.2s}
+.rl .t{font:600 .68rem/1 'Saira Condensed';letter-spacing:.14em}
+.rl .d{display:none;width:7px;height:7px;border:1px solid currentColor;transform:rotate(45deg)}
+.rl:hover{color:var(--ink)}
+.rl.on{color:var(--yellow)}
+.rl.on::after{content:"";position:absolute;left:8px;right:8px;bottom:3px;height:2px;background:var(--yellow)}
+.count{font:600 .68rem/1 'Saira Condensed';letter-spacing:.18em;color:var(--mut);padding:0 6px 0 10px;border-left:1px solid var(--line);white-space:nowrap}
+
+/* ============ DECK SLIDE ============ */
+#deck{position:fixed;inset:0;z-index:5}
+.slide{
+  position:absolute;inset:0;height:100dvh;overflow-y:auto;overflow-x:hidden;
+  display:none;padding:108px 28px 150px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,232,31,.3) transparent;
+}
+.slide::-webkit-scrollbar{width:10px}
+.slide::-webkit-scrollbar-thumb{background:rgba(255,232,31,.28);border:3px solid #040407;border-radius:6px}
+.slide.active{display:block}
+.wrap{width:min(1200px,100%);margin:0 auto}
+.wrap.narrow{max-width:900px}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.2,.7,.3,1) var(--d,0s),transform .75s cubic-bezier(.2,.7,.3,1) var(--d,0s)}
+.slide.go .rv{opacity:1;transform:none}
+
+.eyebrow{font:600 .74rem/1.5 'Saira Condensed';letter-spacing:.36em;color:var(--yellow)}
+.s-title{font-family:Anton,sans-serif;font-size:clamp(2.5rem,5.4vw,4.6rem);line-height:.98;letter-spacing:.015em;color:var(--yellow);text-transform:uppercase;margin-top:12px}
+.lead{margin-top:22px;font:300 1.14rem/1.8 'Saira';color:#ded9cc;max-width:64ch}
+.prose p{font:300 1rem/1.9 'Saira';color:var(--body);max-width:68ch;margin-bottom:1.15em}
+.prose p b{color:var(--ink);font-weight:600}
+.prose i,.prose em{color:#ded9cc}
+
+.next-link{
+  margin-top:46px;display:inline-flex;align-items:center;gap:12px;
+  font:600 .76rem/1 'Saira Condensed';letter-spacing:.28em;color:var(--ink);
+  background:none;border:1px solid var(--line);padding:15px 20px;cursor:pointer;transition:.25s;
+}
+.next-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:square}
+.next-link:hover{border-color:var(--yellow);color:var(--yellow)}
+
+/* ---- Sampul ---- */
+.slide.cover.active{display:flex;align-items:center;justify-content:center}
+.cover-inner{text-align:center;max-width:900px}
+.cover-title{font-family:Anton,sans-serif;font-size:clamp(3.6rem,14vw,11rem);line-height:.95;color:var(--yellow);letter-spacing:.02em;margin-top:18px}
+.cover-rule{height:1px;width:min(430px,72%);background:rgba(255,232,31,.5);margin:30px auto}
+.cover-sub{font:600 .8rem/1.7 'Saira Condensed';letter-spacing:.32em;color:var(--ink)}
+.cover-desc{margin:26px auto 0;max-width:56ch;font:300 1rem/1.85 'Saira';color:var(--body)}
+.cover-actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta{display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border:1px solid var(--yellow);background:none;color:var(--yellow);font:700 .76rem/1 'Saira Condensed';letter-spacing:.28em;cursor:pointer;transition:.25s}
+.cta svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:square}
+.cta:hover{background:var(--yellow);color:#040407}
+.cta-ghost{border-color:var(--line);color:#a7a296}
+.cta-ghost:hover{background:none;border-color:var(--ink);color:var(--ink)}
+.cover-foot{margin-top:44px;font:400 .74rem/1.8 'Saira';color:var(--mut)}
+.cover-legal{margin-top:10px;font:400 .66rem/1.6 'Saira';color:#5c5850}
+
+/* ---- Prolog / Interlud / Epilog ---- */
+.prolog-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:30px 58px;margin-top:34px;align-items:start}
+.epilog-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:30px 58px;margin-top:34px;align-items:start}
+@media(max-width:920px){.prolog-grid,.epilog-grid{grid-template-columns:1fr}}
+
+.facts{border:1px solid var(--line);background:var(--panel);padding:24px}
+.facts h4{font:600 .7rem/1 'Saira Condensed';letter-spacing:.3em;color:var(--yellow);margin-bottom:18px}
+.facts ul{list-style:none}
+.facts li{position:relative;padding-left:22px;margin-bottom:13px;font:300 .92rem/1.7 'Saira';color:var(--body)}
+.facts li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;background:var(--yellow);transform:rotate(45deg)}
+.facts li b{color:var(--ink);font-weight:600}
+
+.quote{border-left:2px solid var(--yellow);padding:6px 0 6px 24px;margin:34px 0;max-width:620px}
+.quote p{font:300 1.28rem/1.65 'Saira';color:#ded9cc}
+.quote cite{display:block;margin-top:12px;font:600 .68rem/1.6 'Saira Condensed';letter-spacing:.26em;color:var(--yellow);font-style:normal}
+
+.tl{margin-top:6px;border-left:1px solid rgba(255,232,31,.35)}
+.tl-item{position:relative;padding:0 0 26px 26px}
+.tl-item::before{content:"";position:absolute;left:-4.5px;top:7px;width:8px;height:8px;background:var(--yellow);transform:rotate(45deg)}
+.tl-year{font-family:Anton,sans-serif;font-size:1.1rem;color:var(--yellow);letter-spacing:.04em;margin-bottom:5px}
+.tl-text{font:300 .94rem/1.75 'Saira';color:var(--body);max-width:56ch}
+
+.epilog-close{margin-top:56px;text-align:center}
+.epilog-close p{font-family:Anton,sans-serif;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.25;color:var(--yellow);letter-spacing:.03em}
+.legal{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font:400 .74rem/1.9 'Saira';color:var(--mut);max-width:88ch}
+
+/* ---- Slide Episode ---- */
+.ep-grid{display:grid;grid-template-columns:minmax(280px,372px) minmax(0,1fr);gap:26px 58px;align-items:start}
+.ep-left{position:sticky;top:104px}
+@media(max-width:1000px){
+  .ep-grid{grid-template-columns:1fr}
+  .ep-left{position:static;max-width:360px}
+}
+.poster-wrap{perspective:900px}
+.poster-tilt{transition:transform .25s ease;will-change:transform}
+.poster-tilt img{display:block;width:100%;border:1px solid rgba(255,255,255,.18);box-shadow:0 34px 70px -34px rgba(0,0,0,.95)}
+.poster-wrap figcaption{margin-top:12px;font:400 .66rem/1.7 'Saira';letter-spacing:.14em;color:var(--mut);text-align:center;text-transform:uppercase}
+.poster-fb{aspect-ratio:2/3;border:1px solid rgba(255,255,255,.18);background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}
+.fb-num{font-family:Anton,sans-serif;font-size:5rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,232,31,.75)}
+.fb-t{font:700 .8rem/1.6 'Saira Condensed';letter-spacing:.22em;color:var(--ink);padding:0 14px}
+.fb-s{font:400 .64rem/1.5 'Saira';color:#6f6a61;letter-spacing:.06em}
+
+.note-card{margin-top:26px;border:1px solid rgba(255,232,31,.3);background:var(--panel);padding:18px 20px}
+.note-card p{font:300 .88rem/1.75 'Saira';color:var(--body)}
+.note-card p b{color:var(--ink);font-weight:600}
+.note-link{margin-top:14px;display:inline-flex;align-items:center;gap:9px;background:none;border:none;color:var(--yellow);font:700 .68rem/1 'Saira Condensed';letter-spacing:.24em;cursor:pointer;padding:0;border-bottom:1px solid rgba(255,232,31,.4);padding-bottom:5px;transition:.2s}
+.note-link svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:square}
+.note-link:hover{color:#fff;border-bottom-color:#fff}
+
+.ep-right{position:relative}
+.ep-right>.ghost{
+  position:absolute;top:-46px;right:-8px;z-index:0;pointer-events:none;user-select:none;
+  font-family:Anton,sans-serif;font-size:clamp(8rem,20vw,16rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(255,232,31,.15);
+}
+.ep-right>*:not(.ghost){position:relative;z-index:1}
+@media(max-width:1000px){.ep-right>.ghost{display:none}}
+.og-note{margin-top:14px;font:300 .94rem/1.75 'Saira';color:var(--mut);max-width:58ch}
+.og-note b{color:var(--body);font-weight:600}
+.best{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:10px 15px;border:1px solid rgba(255,232,31,.5);color:var(--yellow);font:700 .66rem/1.5 'Saira Condensed';letter-spacing:.2em}
+.best svg{width:12px;height:12px;fill:currentColor;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font:600 .66rem/1 'Saira Condensed';letter-spacing:.16em;padding:9px 12px;border:1px solid var(--line);color:var(--mut)}
+.chip b{color:var(--ink);font-weight:700;margin-left:6px}
+
+/* ---- Video ringan (klik untuk memuat) ---- */
+.vembed{position:relative;max-width:640px;margin:26px 0 4px;border:1px solid rgba(255,232,31,.3);background:var(--panel)}
+.vembed::before,.vembed::after{content:"";position:absolute;width:11px;height:11px;pointer-events:none}
+.vembed::before{top:-1px;left:-1px;border-top:1px solid var(--yellow);border-left:1px solid var(--yellow)}
+.vembed::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--yellow);border-right:1px solid var(--yellow)}
+.vembed-btn{width:100%;display:flex;align-items:center;gap:16px;padding:15px 17px;cursor:pointer;background:none;border:none;color:var(--ink);text-align:left}
+.v-play{width:46px;height:46px;flex:none;border:1px solid var(--yellow);border-radius:50%;display:grid;place-items:center;color:var(--yellow);transition:.25s}
+.v-play svg{width:13px;height:13px;fill:currentColor;margin-left:2px}
+.vembed-btn:hover .v-play{background:var(--yellow);color:#040407}
+.v-label{font:700 .76rem/1.4 'Saira Condensed';letter-spacing:.2em;color:var(--yellow)}
+.v-sub{display:block;font:400 .72rem/1.5 'Saira';color:var(--mut);letter-spacing:.05em;margin-top:4px}
+.vembed.playing{max-width:none}
+.vembed.playing iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+
+/* ---- Tab sinopsis / di balik layar ---- */
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-top:30px}
+.tab{font:700 .72rem/1 'Saira Condensed';letter-spacing:.24em;padding:13px 18px;color:var(--mut);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.2s}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+.panel{display:none;padding-top:24px}
+.panel.active{display:block;animation:panIn .4s ease}
+@keyframes panIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel p{font:300 1rem/1.9 'Saira';color:var(--body);max-width:68ch;margin-bottom:1.1em}
+.panel p b{color:var(--ink);font-weight:600}
+.panel ul{list-style:none;margin:4px 0 8px}
+.panel li{position:relative;padding-left:24px;margin-bottom:15px;font:300 .98rem/1.8 'Saira';color:var(--body);max-width:68ch}
+.panel li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;background:var(--yellow);transform:rotate(45deg)}
+.panel li b{color:var(--ink);font-weight:600}
+
+/* ============ RESPONSIF KECIL ============ */
+@media(max-width:720px){
+  .rl .t{display:none}
+  .rl .d{display:block}
+  .rl{padding:12px 7px}
+  .rl.on::after{display:none}
+  #chapterLabel{display:none}
+  .slide{padding:96px 18px 140px}
+}
+@media(max-width:400px){.count{display:none}}
+</style>
+</head>
+<body>
+
+<canvas id="stars" aria-hidden="true"></canvas>
+<div id="ytAudio"></div>
+
+<!-- ================= GERBANG MASUK ================= -->
+<div id="gate">
+  <div class="gate-inner">
+    <p class="gate-kicker">SEJARAH SAGA • 1977–2005</p>
+    <h1 class="gate-logo">STAR WARS</h1>
+    <p class="gate-desc">Dari film yang nyaris tak pernah selesai dibuat pada 1977, hingga kesepakatan 4 miliar dolar dengan Disney — perjalanan dua trilogi yang mengubah wajah sinema, diceritakan slide demi slide.</p>
+    <button id="btnStart" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      MULAI PERJALANAN
+    </button>
+    <p class="gate-note">Intro akan memutar <b>audio opening crawl</b> dari YouTube — pastikan volume perangkatmu menyala.</p>
+    <button id="btnSkipGate" type="button">atau masuk tanpa intro</button>
+  </div>
+</div>
+
+<!-- ================= SEKUENS OPENING CRAWL ================= -->
+<div id="crawlScene" hidden>
+  <p class="c-blue">A long time ago in a galaxy far,<br>far away....</p>
+  <div class="c-logo" aria-hidden="true"><span>STAR WARS</span></div>
+  <div class="c-stage" aria-hidden="true">
+    <div class="c-plane">
+      <div class="c-body">
+        <div class="c-ep">EPISODE 0</div>
+        <h2 class="c-hl">SEJARAH SAGA</h2>
+        <div class="c-hs">DUA TRILOGI • ENAM EPISODE • SATU GALAKSI</div>
+        <p>Dahulu kala, seorang pembuat film muda bernama GEORGE LUCAS memimpikan petualangan luar angkasa seperti serial Flash Gordon yang ditontonnya semasa kecil. Proyek itu ditolak hampir semua studio di Hollywood — dan nyaris menghancurkan dirinya sendiri sebelum selesai dibuat....</p>
+        <p>Namun pada bulan Mei 1977, film yang kemudian dikenal sebagai STAR WARS tayang di tiga puluh dua bioskop, dan dunia sinema berubah selamanya....</p>
+        <p>Di situs ini, engkau akan menelusuri keenam episode saga — dari Trilogi Original hingga Prequel — lengkap dengan sinopsis, kisah di balik layar, poster, dan OPENING CRAWL asli dari setiap film....</p>
+        <p>Di penghujung perjalanan, engkau akan menyaksikan bagaimana sang pencipta kehilangan kendali atas para penggemarnya sendiri — dan mengambil keputusan yang tak pernah terbayangkan siapa pun: menjual galaksi ciptaannya kepada DISNEY....</p>
+        <p>Mari kita mulai dari awal: tahun 1977, di sebuah galaksi yang tidak sejauh itu....</p>
+      </div>
+    </div>
+  </div>
+  <button id="btnSkipCrawl" type="button">
+    LEWATI INTRO
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l8 8-8 8M12 4l8 8-8 8"/></svg>
+  </button>
+</div>
+
+<!-- ================= RANGKA SITUS ================= -->
+<header id="topbar">
+  <div class="brand"><span class="b1">STAR WARS</span><span class="b2">SEJARAH SAGA</span></div>
+  <div id="chapterLabel">—</div>
+</header>
+
+<main id="deck">
+
+  <!-- ===== 00 SAMPUL ===== -->
+  <section class="slide cover" data-label="SAMPUL" data-full="SEJARAH SAGA">
+    <div class="cover-inner">
+      <p class="eyebrow rv">SEJARAH DUA TRILOGI • 1977–2005</p>
+      <h1 class="cover-title rv" style="--d:.07s">STAR WARS</h1>
+      <div class="cover-rule rv" style="--d:.14s"></div>
+      <p class="cover-sub rv" style="--d:.2s">ENAM EPISODE. SATU GALAKSI. SATU KISAH DI BALIK LAYAR.</p>
+      <p class="cover-desc rv" style="--d:.28s">Trilogi Original (1977–1983) dan Prequel Trilogy (1999–2005): sinopsis lengkap, opening crawl asli, poster teatrikal, dan kisah produksi setiap episode — ditutup dengan cerita bagaimana George Lucas akhirnya menjual Lucasfilm kepada Disney.</p>
+      <div class="cover-actions rv" style="--d:.36s">
+        <button class="cta" type="button" data-goto="1">MULAI DARI PROLOG <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <button class="cta cta-ghost" type="button" data-goto="9">LONCAT KE EPILOG DISNEY</button>
+      </div>
+      <p class="cover-foot rv" style="--d:.44s">Ber pindah slide dengan tombol panah di bawah, papan ketik (← / →), atau tombol di setiap akhir babak.</p>
+      <p class="cover-legal rv" style="--d:.5s">Situs penggemar non-komersial — tidak berafiliasi dengan Lucasfilm Ltd. dan The Walt Disney Company.</p>
+    </div>
+  </section>
+
+  <!-- ===== 01 PROLOG ===== -->
+  <section class="slide" data-label="PROLOG" data-full="PROLOG — KELAHIRAN LEGENDA">
+    <div class="wrap">
+      <p class="eyebrow rv">BAB 01 • 1973–1977 • SEBELUM SAGA</p>
+      <h2 class="s-title rv" style="--d:.06s">KELAHIRAN LEGENDA</h2>
+      <p class="lead rv" style="--d:.12s">Sebelum menjadi mitos, ia adalah film yang hampir tidak pernah selesai.</p>
+      <div class="prolog-grid">
+        <div class="prose">
+          <p class="rv" style="--d:.16s">Keberhasilan <i>American Graffiti</i> (1973) memberi George Lucas — saat itu baru 29 tahun — kekuatan untuk mewujudkan obsesinya sejak kecil: petualangan luar angkasa bergaya serial <i>Flash Gordon</i> dan <i>Buck Rogers</i>. Hak <i>Flash Gordon</i> terlalu mahal untuk dibeli, jadi Lucas mengambil jalan yang lebih gila: menulis mitologi luar angkasanya sendiri.</p>
+          <p class="rv" style="--d:.2s">Yang muncul dari mesin tiknya adalah naskah yang terus berubah bentuk — puluhan draft, judul berganti dari <i>The Star Wars</i> hingga <i>Adventures of Luke Starkiller</i>. United Artists dan Universal menolaknya. Akhirnya Alan Ladd Jr. dari 20th Century Fox mengambil risiko — bukan karena ia paham naskahnya (tidak ada yang paham), tapi karena ia percaya pada Lucas.</p>
+          <p class="rv" style="--d:.24s">Produksi yang menyusul adalah mimpi buruk yang melegenda. Tak ada studio efek yang mampu, maka Lucas mendirikan sendiri <b>ILM (Industrial Light &amp; Magic)</b>. Di Tunisia dan Elstree, London, alat rusak, R2-D2 mogok, dan kru Inggris menganggap film ini lelucon — sambil makan siang dengan segelas bir. Lucas sendiri jatuh sakit: tekanan darah tinggi, nyeri dada, diagnosa kelelahan. Potongan kasar pertama dianggap bencana — sampai diselamatkan di ruang edit oleh <b>Marcia Lucas</b>, Paul Hirsch, dan Richard Chew, yang merangkai pertempuran dengan potongan cepat ala film perang Dunia II.</p>
+          <p class="rv" style="--d:.28s">Fox menayangkannya 25 Mei 1977 di <b>32 bioskop saja</b> — mereka bahkan tidak yakin. Penonton kembali antre untuk kedua, ketiga, kesepuluh kalinya. Dalam hitungan minggu, <i>Star Wars</i> menjadi film terlaris sepanjang masa dan memenangkan 7 Oscar. Dan di tengah itu semua: keputusan bisnis paling jenius dalam sejarah Hollywood — Lucas menukar gaji sutradaranya ($500 ribu) dengan hak sekuel dan <i>merchandise</i> yang semua orang anggap tak bernilai.</p>
+          <p class="rv" style="--d:.32s">Satu hal yang sering terlupakan: film ini aslinya hanya berjudul <b>“STAR WARS”</b>. Frasa <i>Episode IV — A New Hope</i> belum ada di layar ketika film itu pertama kali tayang — subjudul itu ditambahkan pada penayangan ulang dan dikukuhkan dalam <i>Special Edition</i> 1997. Tanda bahwa di kepala Lucas, film 1977 memang selalu satu bab dari saga yang lebih besar: bab tengah.</p>
+        </div>
+        <aside>
+          <div class="vembed rv" style="--d:.2s" data-vid="W0gs_TuqoIU">
+            <button class="vembed-btn" type="button">
+              <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              <span>
+                <span class="v-label">TONTON: “STAR WARS” MENJADI “A NEW HOPE”</span>
+                <span class="v-sub">Kisah perubahan judul dalam suntingan ulang • YouTube</span>
+              </span>
+            </button>
+          </div>
+          <div class="facts rv" style="--d:.28s">
+            <h4>ANGKA &amp; FAKTA — 1977</h4>
+            <ul>
+              <li><b>Budget</b> — sekitar $11 juta</li>
+              <li><b>Box office</b> — sekitar $775 juta (total rilis teatrikal)</li>
+              <li><b>Pekan perdana</b> — hanya 32 bioskop</li>
+              <li><b>Oscar</b> — 7 piala dari 10 nominasi</li>
+              <li><b>R2-D2</b> — dinamai dari gulungan “Reel 2, Dialogue 2” American Graffiti</li>
+              <li><b>Chewbacca</b> — terinspirasi Indiana, anjing peliharaan Lucas</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <button class="next-link rv" type="button" data-goto="2">LANJUT — EPISODE IV: A NEW HOPE <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ===== 02 EPISODE IV ===== -->
+  <section class="slide" data-label="IV" data-full="EPISODE IV — A NEW HOPE">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/1977/posters/star_wars_ver2_xlg.jpg" data-ep="IV" data-fb="STAR WARS (1977)" alt="Poster teatrikal Star Wars 1977" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 1977 • impawards.com</figcaption>
+        </figure>
+        <aside class="note-card rv" style="--d:.12s">
+          <p>Film ini tayang perdana dengan judul <b>“STAR WARS”</b> saja. Subjudul <b>“Episode IV — A New Hope”</b> menyusul pada penayangan ulang — kisah lengkapnya ada di Prolog.</p>
+          <button class="note-link" type="button" data-goto="1">LIHAT KISAHNYA DI PROLOG <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </aside>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">IV</span>
+        <p class="eyebrow rv">BAB 02 • EPISODE IV • 1977 • 20TH CENTURY FOX</p>
+        <h2 class="s-title rv" style="--d:.06s">A NEW HOPE</h2>
+        <p class="og-note rv" style="--d:.1s">Dirilis di bioskop hanya dengan judul <b>“STAR WARS”</b> — “A New Hope” menyusul pada penayangan ulang.</p>
+        <div class="chips rv" style="--d:.14s">
+          <span class="chip">BUDGET <b>± $11 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $775 JT</b></span>
+          <span class="chip">SUTRADARA <b>GEORGE LUCAS</b></span>
+          <span class="chip">OSCAR <b>7</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.18s" data-vid="iXDnFYu91vY">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE IV</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.22s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p>Galaksi berada dalam perang saudara. Kapal pemberontak yang membawa data teknis <b>Death Star</b> — stasiun tempur pemusnah planet milik Imperium — diintersepsi oleh <b>Darth Vader</b>. Sebelum tertangkap, Putri <b>Leia</b> menyembunyikan data itu dalam memori droid R2-D2, yang melarikan diri ke gurun Tatooine bersama C-3PO — membawa pesan terakhir: “Tolong aku, Obi-Wan Kenobi. Kau satu-satunya harapanku.”</p>
+          <p>Droid itu jatuh ke tangan <b>Luke Skywalker</b>, petani muda yang memimpikan bintang-bintang. Pesan itu membawanya menemui <b>Obi-Wan Kenobi</b>, Jedi Master yang bersembunyi, dan lightsaber milik ayah yang tak pernah dikenalnya. Ketika pasukan Imperium membantai keluarga yang membesarnya, Luke meninggalkan Tatooine — menyewa penyeludup <b>Han Solo</b> dan Wookiee-nya, <b>Chewbacca</b>, untuk mengantarkan droid itu ke Alderaan.</p>
+          <p>Namun Alderaan telah dihapus dari angkasa oleh Death Star, dan Millennium Falcon justru tertangkap. Setelah menyelamatkan Leia dari eksekusi — dan kehilangan Obi-Wan dalam duel melawan Vader — para pahlawan membawa kelemahan stasiun itu kepada Pemberontak. Dalam serangan X-wing terakhir, dengan Han kembali pada detik terakhir dan Obi-Wan berbisik dari alam Force, Luke mematikan komputernya, memercayakan diri pada Force, dan menembakkan dua torpedo yang menghancurkan Death Star.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>Harrison Ford</b> — saat itu tukang kayu di panggung — terpilih menjadi Han Solo; pihak studio sempat khawatir karakternya “terlalu dingin” bagi pahlawan.</li>
+            <li><b>Suara legendaris</b> — dengung lightsaber dibuat Ben Burtt dari proyektor film tua dan derau TV; napas Vader dari regulator selam.</li>
+            <li><b>Skor John Williams</b> (London Symphony Orchestra) mengangkat film menjadi opera luar angkasa — dan menjadi march paling terkenal dalam sejarah film.</li>
+            <li><b>Natal 1977</b> — permintaan mainan begitu besar, Kenner menjual “kotak kosong” berisi voucher karena stok mainan belum diproduksi.</li>
+            <li><b>Eksekutif Fox yakin film ini akan gagal</b> — sampai pekan pertama, ketika bioskop meminta salinan tambahan setiap hari.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="3">LANJUT — EPISODE V: THE EMPIRE STRIKES BACK <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03 EPISODE V ===== -->
+  <section class="slide" data-label="V" data-full="EPISODE V — THE EMPIRE STRIKES BACK">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/1980/posters/empire_strikes_back_ver2_xlg.jpg" data-ep="V" data-fb="THE EMPIRE STRIKES BACK (1980)" alt="Poster teatrikal The Empire Strikes Back 1980" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 1980 • impawards.com</figcaption>
+        </figure>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">V</span>
+        <p class="eyebrow rv">BAB 03 • EPISODE V • 1980 • 20TH CENTURY FOX</p>
+        <h2 class="s-title rv" style="--d:.06s">THE EMPIRE STRIKES BACK</h2>
+        <div class="chips rv" style="--d:.12s">
+          <span class="chip">BUDGET <b>± $18 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $538 JT</b></span>
+          <span class="chip">SUTRADARA <b>IRVIN KERSHNER</b></span>
+          <span class="chip">CERITA <b>GEORGE LUCAS</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.16s" data-vid="fm_4WaPbbK0">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE V</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.2s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p>Kekaisaran membalas: markas Pemberontak di planet es <b>Hoth</b> dihancurkan oleh para walker raksasa. Setelah visi dari Obi-Wan, Luke — bersama R2-D2 — terbang ke rawa <b>Dagobah</b> dan menemukan <b>Yoda</b>, Jedi Master kerdil yang perkasa. Pelatihannya dimulai, dipenuhi peringatan tentang kegelapan yang tumbuh di dalam dirinya.</p>
+          <p>Sementara itu Han, Leia, Chewbacca, dan C-3PO kabur dengan Millennium Falcon yang rusak mesinnya, dikejar armada Vader dan pemburu bayaran <b>Boba Fett</b>. Mereka berlindung di <b>Cloud City</b> milik teman lama Han, Lando Calrissian — yang terpaksa berkhianat. Vader menguji pembekuan karbonit pada Han: dibekukan hidup-hidup dan diserahkan kepada Fett. Perpisahan itu diwarnai kalimat “Aku mencintaimu.” — “Aku tahu.”</p>
+          <p>Melihat penderitaan temannya dalam visi, Luke meninggalkan Dagobah dan mengabaikan peringatan Yoda bahwa ia belum siap. Dalam duel lightsaber pertamanya melawan Vader, Luke kehilangan tangan — lalu menerima kalimat paling terkenal dalam sejarah film: <b>“Aku adalah ayahmu.”</b> Menolak ajakan bergabung dengan sisi gelap, ia jatuh dan diselamatkan oleh Leia yang merasakannya melalui Force. Film berakhir tanpa kemenangan: Han dibawa pergi, Luke mendapat tangan mekanis, dan galaksi menunggu babak terakhir.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>Lucas membiayainya sendiri</b> — keluar dari sistem studio dan meminjam sekitar $10 juta dari bank; jika film gagal, ia bangkrut. Film berhasil, dan Lucas memilikinya sepenuhnya.</li>
+            <li><b>Twist dirahasiakan</b> — naskah yang dibaca kru memuat kalimat palsu “Obi-Wan membunuh ayahmu.” Mark Hamill baru diberi tahu kebenarannya sesaat sebelum kamera menyala.</li>
+            <li><b>“Aku tahu.”</b> — jawaban Han Solo diimprovisasi Harrison Ford atas saran sutradara Irvin Kershner, dan menjadi salah satu balasan terbaik dalam sejarah film.</li>
+            <li><b>Kritik awal dingin</b> — “terlalu gelap, tanpa penutup.” Kini film ini kerap disebut <b>yang terbaik dalam seluruh saga</b>.</li>
+            <li><b>“The Imperial March”</b> — komposisi John Williams untuk Vader, lebih dikenal luas daripada kebanyakan lagu kebangsaan.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="4">LANJUT — EPISODE VI: RETURN OF THE JEDI <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 EPISODE VI ===== -->
+  <section class="slide" data-label="VI" data-full="EPISODE VI — RETURN OF THE JEDI">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/1983/posters/return_of_the_jedi_ver3_xlg.jpg" data-src-fix="http://www.impawards.com/1983/posters/return_of_the_jedi_ver2_xlg.jpg" data-ep="VI" data-fb="RETURN OF THE JEDI (1983)" alt="Poster teatrikal Return of the Jedi 1983" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 1983 • impawards.com</figcaption>
+        </figure>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">VI</span>
+        <p class="eyebrow rv">BAB 04 • EPISODE VI • 1983 • 20TH CENTURY FOX</p>
+        <h2 class="s-title rv" style="--d:.06s">RETURN OF THE JEDI</h2>
+        <div class="chips rv" style="--d:.12s">
+          <span class="chip">BUDGET <b>± $32,5 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $475 JT</b></span>
+          <span class="chip">SUTRADARA <b>RICHARD MARQUAND</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.16s" data-vid="SP38YUTFWjY">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE VI</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.2s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p>Di istana <b>Jabba the Hutt</b> di Tatooine, para pahlawan menjalankan penyelamatan berlapis: para droid dikirim sebagai “hadiah”, Lando menyamar sebagai pengawal, dan Leia membebaskan Han dari pembekuan karbonit. Semuanya berujung kerusuhan — Leia mencekik Jabba, barge meledak, dan para pahlawan lolos utuh.</p>
+          <p>Kembali ke Dagobah, Luke mengetahui dari Yoda yang sekarat: Vader memang ayahnya, <b>Leia adalah saudara kembarnya</b>, dan pelatihannya telah selesai. Sementara armada Pemberontak berkumpul untuk menyerang <b>Death Star kedua</b> — yang masih setengah jadi dan dilindungi generator perisai di hutan Endor — Luke menyerahkan diri kepada Vader: ia merasakan masih ada cahaya dalam diri sang ayah.</p>
+          <p>Di ruang takhta, <b>Kaisar Palpatine</b> mempermainkan Luke menuju amarah. Duel melawan Vader berakhir ketika Luke — setelah memotong tangan ayahnya — melempar pedangnya: “Aku adalah Jedi, seperti ayahku sebelum aku.” Dalam sambaran kebencian Force lightning sang Kaisar, Vader kembali ke sisi terang dan mengorbankan dirinya demi putranya. Lando menghancurkan Death Star, Imperium runtuh, dan di hutan Endor roh Anakin, Obi-Wan, dan Yoda menyaksikan galaksi merayakan kebebasan pertamanya.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>Judulnya hampir “Revenge of the Jedi”</b> — Lucas mengubahnya di detik terakhir karena “Jedi tidak membalas dendam”; poster “Revenge” kini menjadi barang koleksi paling langka.</li>
+            <li><b>David Lynch dan David Cronenberg</b> sempat ditawari kursi sutradara; keduanya menolak. Steven Spielberg tak bisa karena konflik Lucas dengan serikat sutradara (DGA).</li>
+            <li><b>Lawrence Kasdan dan Marquand ingin Han mati</b> dengan akhir yang pahit — Lucas menolak: saganya adalah dongeng, dan dongeng berakhir cerah.</li>
+            <li><b>Ewoks</b> — pembalikan dari gagasan awal: teknologi Imperium dikalahkan oleh makhluk primitif mungil di hutan Endor.</li>
+            <li><b>Penutup trilogi</b> — Lucas menyatakan saga selesai: “ini adalah film terakhir Star Wars.” Sejarah membuktikan sebaliknya.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="5">LANJUT — INTERLUD: KEMBALINYA SANG PENCIPTA <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 INTERLUD ===== -->
+  <section class="slide" data-label="INTERLUD" data-full="INTERLUD — KEMBALINYA SANG PENCIPTA">
+    <div class="wrap narrow">
+      <p class="eyebrow rv">BAB 05 • 1983–1999 • DI ANTARA DUA TRILOGI</p>
+      <h2 class="s-title rv" style="--d:.06s">KEMBALINYA SANG PENCIPTA</h2>
+      <p class="lead rv" style="--d:.12s">Enam belas tahun setelah Return of the Jedi, George Lucas kembali — kali ini tanpa batas.</p>
+      <div class="prose">
+        <p class="rv" style="--d:.16s">Setelah 1983, Lucas habis. Bukan sekadar lelah: produksi Jedi melahapnya habis-habisan, dan perceraiannya dengan <b>Marcia</b> — editor yang ikut menyelamatkan film pertama — menutup babak paling pribadi hidupnya. Ia menjauh dari kursi sutradara, membangun ILM menjadi kekuatan efek visual terdepan dunia, dan memproduseri Indiana Jones.</p>
+        <p class="rv" style="--d:.2s">Tapi ceritanya tidak pernah dia tinggalkan. Sejak 1977, <i>Star Wars</i> di kepalanya adalah <b>bab tengah</b> — sementara catatan kasar tentang kejatuhan Anakin Skywalker, kematian Republik, dan Perang Klon sudah lama tertulis di latar belakang. Yang ia tunggu hanyalah teknologi.</p>
+      </div>
+      <div class="quote rv" style="--d:.24s">
+        <p>“Ini semacam puisi. Setiap bait… saling berima dengan bait yang lain.”</p>
+        <cite>GEORGE LUCAS — TENTANG STRUKTUR SAGA</cite>
+      </div>
+      <div class="prose">
+        <p class="rv" style="--d:.28s">Buktinya datang pada 1993: <i>Jurassic Park</i> — buatan ILM sendiri — memperlihatkan bahwa CGI bisa menghidupkan apa pun. Pada November 1994, Lucas akhirnya duduk dan mulai menulis Episode I. Di atas kertas bergaris, dengan tangan.</p>
+      </div>
+      <div class="panel rv" style="--d:.32s">
+        <ul>
+          <li><b>Dana pribadi</b> — prequel dibiayai kantong Lucas sendiri; Fox hanya menjadi distributor. Untuk pertama kalinya, kendali kreatif 100% berada di tangannya.</li>
+          <li><b>Special Edition 1997</b> — suntingan ulang trilogi original menjadi latihan teknologi (dan petasan kontroversi yang diceritakan di Epilog).</li>
+          <li><b>Sepenuhnya digital</b> — Episode II (2002) menjadi blockbuster pertama dalam sejarah yang direkam 100% tanpa gulungan film.</li>
+          <li><b>Pemeran baru</b> — Ewan McGregor (Obi-Wan muda), Natalie Portman (Padmé), serta Jake Lloyd dan Hayden Christensen (Anakin) mengambil alih peran-peran ikonik.</li>
+        </ul>
+      </div>
+      <button class="next-link rv" type="button" data-goto="6">LANJUT — EPISODE I: THE PHANTOM MENACE <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ===== 06 EPISODE I ===== -->
+  <section class="slide" data-label="I" data-full="EPISODE I — THE PHANTOM MENACE">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/1999/posters/star_wars_episode_one_the_phantom_menace_ver2_xlg.jpg" data-ep="I" data-fb="THE PHANTOM MENACE (1999)" alt="Poster teatrikal The Phantom Menace 1999" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 1999 • impawards.com</figcaption>
+        </figure>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">I</span>
+        <p class="eyebrow rv">BAB 06 • EPISODE I • 1999 • 20TH CENTURY FOX</p>
+        <h2 class="s-title rv" style="--d:.06s">THE PHANTOM MENACE</h2>
+        <div class="chips rv" style="--d:.12s">
+          <span class="chip">BUDGET <b>± $115 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $924 JT</b></span>
+          <span class="chip">SUTRADARA <b>GEORGE LUCAS</b></span>
+          <span class="chip">FILM TERLARIS <b>1999</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.16s" data-vid="vwp5Ii1d-N4">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE I</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.2s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p><b>Federasi Perdagangan</b>, didalangi oleh sosok bayangan <b>Darth Sidious</b>, memblokade planet Naboo. Dua Jedi — Master <b>Qui-Gon Jinn</b> dan muridnya <b>Obi-Wan Kenobi</b> — dikirim sebagai duta, malah diburu hidup-hidup. Bersama Ratu muda <b>Padmé Amidala</b>, mereka meloloskan diri dan terdampar di gurun Tatooine.</p>
+          <p>Di sana, Qui-Gon bertemu budak cilik <b>Anakin Skywalker</b> — anak tanpa ayah dengan kadar midichlorian tertinggi yang pernah diukur, melampaui Yoda sendiri. Yakin telah menemukan <b>“Yang Terpilih”</b> yang diramalkan akan menyeimbangkan Force, Qui-Gon mempertaruhkan segalanya — termasuk kapal mereka — dalam balapan pod demi membebaskan anak itu.</p>
+          <p>Di Coruscant, Senat tercerai-berai; Padmé kembali ke Naboo dan memimpin aliansi dengan bangsa Gungan melawan tentara droid. Dalam duel tiga-lawan-satu melawan Sith <b>Darth Maul</b>, Qui-Gon tewas; Obi-Wan membelah sang pembunuh dan berjanji melatih Anakin meski Dewan menolaknya. Dan jauh di atas segalanya, senator yang tampan dan budiman — <b>Palpatine</b> — terpilih menjadi Kanselir Tertinggi galaksi. Kemenangan dirayakan; kekacauan justru baru saja dimulai.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>16 tahun penantian</b> — orang membeli tiket film lain hanya untuk menonton trailer Episode I, lalu pulang sebelum filmnya dimulai.</li>
+            <li><b>Jar Jar Binks</b> — karakter utama digital pertama dalam sejarah film — menuai badai kritik; aktor Ahmed Best bertahun-tahun terpuruk karenanya.</li>
+            <li><b>“Duel of the Fates”</b> — John Williams menggubah duel tiga lawan satu sebagai requiem berbahasa Sanskerta; banyak menyebutnya duel lightsaber terbaik sepanjang saga.</li>
+            <li><b>Balapan pod</b> — dibangun sebagai demonstrasi kekuatan audio-visual digital, dari sistem THX yang diperbarui khusus.</li>
+            <li><b>Resepsi terbelah</b> — kritik dingin (politik, midi-chlorian, Anak kecil), namun penonton membludak: film terlaris tahun 1999 dengan salah satu pembukaan terbesar sepanjang masa.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="7">LANJUT — EPISODE II: ATTACK OF THE CLONES <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 07 EPISODE II ===== -->
+  <section class="slide" data-label="II" data-full="EPISODE II — ATTACK OF THE CLONES">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/2002/posters/star_wars_episode_two_attack_of_the_clones_ver2.jpg" data-ep="II" data-fb="ATTACK OF THE CLONES (2002)" alt="Poster teatrikal Attack of the Clones 2002" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 2002 • impawards.com</figcaption>
+        </figure>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">II</span>
+        <p class="eyebrow rv">BAB 07 • EPISODE II • 2002 • 20TH CENTURY FOX</p>
+        <h2 class="s-title rv" style="--d:.06s">ATTACK OF THE CLONES</h2>
+        <div class="chips rv" style="--d:.12s">
+          <span class="chip">BUDGET <b>± $115 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $649 JT</b></span>
+          <span class="chip">SUTRADARA <b>GEORGE LUCAS</b></span>
+          <span class="chip">DIREKAM <b>100% DIGITAL</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.16s" data-vid="ZXVG4LBo0wc">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE II</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.2s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p>Sepuluh tahun setelah blokade Naboo, pembunuh bayaran mencoba mengakhiri hidup Senator <b>Padmé Amidala</b>. Obi-Wan dan padawannya — kini <b>Anakin Skywalker</b>, yang angkuh dan luar biasa berbakat — ditugaskan melindunginya. Ketika upaya kedua nyaris berhasil, Anakin diam-diam mengawal Padmé kembali ke Naboo, sementara Obi-Wan menelusuri pembunuh itu hingga ke planet samudra <b>Kamino</b>.</p>
+          <p>Di Kamino, Obi-Wan menemukan pasukan <b>klon</b> — ratusan ribu — dibuat atas “permintaan” seorang Jedi Master yang sudah lama meninggal, dengan genetik pemburu bayaran <b>Jango Fett</b>. Jejak berakhir di Geonosis, markas gerakan separatis yang dipimpin <b>Count Dooku</b> — mantan Jedi yang kini menjadi tangan bayangan Sith.</p>
+          <p>Terasing di danau Naboo, Anakin dan Padmé jatuh cinta — cinta yang haram bagi seorang Jedi. Diganggu mimpi buruk tentang ibunya, Anakin pulang ke Tatooine dan mendapati <b>Shmi</b> diculik dan disiksa; ia menemukannya sekarat, dan dalam amarahnya membantai seluruh kamp Tusken — pertama kalinya ia menyerah pada kegelapan. Di Geonosis, upaya penyelamatan berubah bencana hingga Yoda tiba memimpin pasukan klon: <b>Perang Klon</b> meletus. Dalam duel, Dooku memotong tangan kanan Anakin. Dan di penghujung film, dalam pernikahan rahasia di tepi danau Naboo, tragedi yang akan melahap galaksi resmi dimulai.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>Film pertama tanpa gulongan film</b> — blockbuster pertama dalam sejarah yang direkam sepenuhnya dengan kamera digital; sejumlah bioskop harus memasang proyektor digital khusus.</li>
+            <li><b>Yoda sepenuhnya CGI</b> — dan untuk pertama kalinya, pedangnya terhunus. Sorakan penonton di bioskop saat adegan itu tercatat sebagai salah satu momen terbesar 2002.</li>
+            <li><b>Christopher Lee</b> — di usia 79 tahun, mayoritas koreografi duel Dooku ia kerjakan sendiri.</li>
+            <li><b>“I don’t like sand.”</b> — dialog romantis yang jadi lelucon abadi; Lucas membela gaya melodrama 1930-an yang memang sengaja dipilih.</li>
+            <li><b>Bayi pasukan</b> — pasukan klon inilah yang suatu hari akan menjadi pasukan badai yang mengeksekusi Order 66 di Episode III.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="8">LANJUT — EPISODE III: REVENGE OF THE SITH <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 08 EPISODE III ===== -->
+  <section class="slide" data-label="III" data-full="EPISODE III — REVENGE OF THE SITH">
+    <div class="wrap ep-grid">
+      <div class="ep-left">
+        <figure class="poster-wrap rv">
+          <div class="poster-tilt">
+            <img data-src="http://www.impawards.com/2005/posters/star_wars_episode_three_ver2_xlg.jpg" data-ep="III" data-fb="REVENGE OF THE SITH (2005)" alt="Poster teatrikal Revenge of the Sith 2005" loading="lazy">
+          </div>
+          <figcaption>Poster teatrikal • 2005 • impawards.com</figcaption>
+        </figure>
+      </div>
+      <div class="ep-right">
+        <span class="ghost" aria-hidden="true">III</span>
+        <p class="eyebrow rv">BAB 08 • EPISODE III • 2005 • BABAK PENUTUP PREQUEL</p>
+        <h2 class="s-title rv" style="--d:.06s">REVENGE OF THE SITH</h2>
+        <div class="best rv" style="--d:.1s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.6 1-4.75 4.4 1.15 6.6L12 17.2l-5.9 3.1 1.15-6.6L2.5 9.3l6.6-1z"/></svg>
+          <span>DIPILIH FANDOM: PREQUEL TERBAIK</span>
+        </div>
+        <div class="chips rv" style="--d:.14s">
+          <span class="chip">BUDGET <b>± $113 JT</b></span>
+          <span class="chip">BOX OFFICE <b>± $868 JT</b></span>
+          <span class="chip">SUTRADARA <b>GEORGE LUCAS</b></span>
+          <span class="chip">RATING <b>PG TERGELAP</b></span>
+        </div>
+        <div class="vembed rv" style="--d:.18s" data-vid="3eVDpFmc5DI">
+          <button class="vembed-btn" type="button">
+            <span class="v-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span>
+              <span class="v-label">TONTON OPENING CRAWL — EPISODE III</span>
+              <span class="v-sub">Intro film • YouTube • dengan suara</span>
+            </span>
+          </button>
+        </div>
+        <div class="tabs rv" style="--d:.22s">
+          <button class="tab active" type="button" data-tab="sin">SINOPSIS</button>
+          <button class="tab" type="button" data-tab="bts">DI BALIK LAYAR</button>
+        </div>
+        <div class="panel active" data-panel="sin">
+          <p>Tiga tahun Perang Klon. Coruscant dikepung: <b>Kanselir Palpatine</b> diculik ke kapal Jenderal Grievous. Dalam misi penyelamatan, Obi-Wan dan Anakin menewaskan <b>Count Dooku</b> — atas bisikan Palpatine, atas tawanan yang telah menyerah. Langkah pertama di jalan gelap terasa seperti kemenangan.</p>
+          <p>Anakin, kini pahlawan perang dan anggota Dewan Jedi tanpa gelar Master, digerogoti mimpi buruk: <b>Padmé akan mati melahirkan</b>. Palpatine mengikatnya dengan kisah “Darth Plagueis yang Bijak” — Sith yang mampu mencegah kematian — lalu mengungkap kebenaran: <b>dialah Darth Sidious</b>. Terjepit antara kode Jedi dan ketakutan kehilangan, Anakin membocorkan sang Sith ke Mace Windu — namun saat Windu hendak mengeksekusinya, Anakin memotong tangan sang Master, dan bersumpah sebagai <b>Darth Vader</b>.</p>
+          <p><b>Order 66</b> berbunyi: di seluruh galaksi, tentara klon membalik dan menembak para Jedi. Vader memimpin penyerbuan ke Kuil Jedi, lalu menumpas para pemimpin separatis di <b>Mustafar</b>. Dua duel takdir menyusul: Yoda kalah tipis dari Sidious di ruang senat; Obi-Wan — setelah perpisahan yang meruntuhkan, “Kau adalah saudaraku, Anakin!” — mengalahkan Vader di atas lahar dan meninggalkannya terbakar.</p>
+          <p>Padmé meninggal melahirkan kembar, dengan keyakinan terakhirnya: <b>masih ada kebaikan dalam diri Vader</b>. Sidious menyelamatkan yang tersisa dari Anakin dalam baju besi hitam legendaris. Kembar itu disembunyikan — Leia ke Alderaan, Luke ke keluarga Lars di Tatooine. Dan begitulah Prequel berakhir, tepat di titik di mana <i>Star Wars</i> 1977 dimulai.</p>
+        </div>
+        <div class="panel" data-panel="bts">
+          <ul>
+            <li><b>Order 66 &amp; “Battle of the Heroes”</b> — John Williams menggubah duel Mustafar seperti requiem; adegan pembantaian Jedi tanpa dialog menjadi salah satu urutan paling menusuk dalam saga.</li>
+            <li><b>Adegan opera</b> — monolog “Tragedi Darth Plagueis yang Bijak” kerap disebut sebagai dialog terbaik yang pernah ditulis Lucas: kisah Sith yang bisa menyelamatkan orang dari kematian… kecuali dirinya sendiri.</li>
+            <li><b>Batuk Grievous</b> — direkam langsung dari batuk asli George Lucas yang sedang menderita bronkitis.</li>
+            <li><b>“NOOO!” Vader</b> — teriakan penutup yang kontroversial, disindir fans bertahun-tahun kemudian (dan disisipkan Lucas ke Episode V pada Blu-ray 2011 — lihat Epilog).</li>
+            <li><b>Penilaian</b> — kritik dan penggemar sepakat: jembatan paling mulus menuju Trilogi Original, dan bagi banyak orang, film terbaik dari seluruh Prequel.</li>
+          </ul>
+        </div>
+        <button class="next-link rv" type="button" data-goto="9">LANJUT — EPILOG: KENDALI YANG HILANG <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 EPILOG ===== -->
+  <section class="slide" data-label="EPILOG" data-full="EPILOG — PENJUALAN KE DISNEY">
+    <div class="wrap">
+      <p class="eyebrow rv">BAB TERAKHIR • 1997–2012 • MASA DEPAN</p>
+      <h2 class="s-title rv" style="--d:.06s">KENDALI YANG HILANG</h2>
+      <div class="quote rv" style="--d:.12s">
+        <p>“Mengapa aku harus membuat film lagi, kalau semua orang terus berteriak kepadaku dan bilang aku orang yang mengerikan?”</p>
+        <cite>GEORGE LUCAS — THE NEW YORK TIMES, 2012</cite>
+      </div>
+      <div class="epilog-grid">
+        <div class="prose">
+          <p class="rv" style="--d:.16s">Selama tiga dekade setelah 1977, Lucas terus kembali ke kanvasnya sendiri — dan justru di situlah letak masalahnya: <b>kanvas itu sudah bukan miliknya semata</b>. <i>Special Edition</i> 1997, DVD 2004, Blu-ray 2011: Greedo menembak lebih dulu, wajah hantu Anakin diganti, dan sebuah “NOOO!” disisipkan ke adegan paling ikonik Vader. Bagi Lucas, ini hak seorang pelukis atas lukisannya. Bagi jutaan penggemar, ini penghinaan atas kenangan kolektif — dan slogan perlawanan <b>“Han shot first”</b> lahir.</p>
+          <p class="rv" style="--d:.2s">Para penggemar menuntut versi teatrikal 1977 yang asli dirilis dalam restorasi layar lebar penuh; Lucas menolak mentah-mentah — baginya versi suntingan ulang adalah satu-satunya versi resmi. Perang suntingan ini berlangsung dua dekade, dan hubungan antara pencipta dengan fandom yang dulunya takzim berubah menjadi perang atrisi tanpa pemenang.</p>
+          <p class="rv" style="--d:.24s">Setelah badai kritik Prequel, dan pengalaman terakhirnya memproduksi <i>Red Tails</i> (2012) melawan mesin studio Hollywood, Lucas menyerah. Pada 2012 ia mengucapkan kalimat pembuka slide ini — lalu mulai mencari pewaris.</p>
+          <p class="rv" style="--d:.28s"><b>30 Oktober 2012</b>: di ruang rapat Disney, kesepakatan diumumkan. Lucasfilm — beserta ILM, Skywalker Sound, dan seluruh galaksi Star Wars — berpindah tangan kepada The Walt Disney Company senilai sekitar <b>$4,05 miliar</b>, separuh tunai separuh saham. Kathleen Kennedy ditunjuk memimpin, dan hari itu juga Episode VII diumumkan. “Waktunya menyerahkan Star Wars kepada generasi pembuat film baru,” kata Lucas saat pengumuman.</p>
+          <p class="rv" style="--d:.32s"><i>The Force Awakens</i> (2015) meledak menjadi lebih dari $2 miliar — namun kerangka cerita yang Lucas serahkan justru tidak dipakai. “Mereka ingin membuat film retro,” katanya kemudian. “Aku tidak suka hal seperti itu.” Lingkarannya pun tertutup: sang pencipta berhasil melihat saganya hidup abadi — justru setelah ia melepaskannya.</p>
+        </div>
+        <div>
+          <div class="tl rv" style="--d:.18s">
+            <div class="tl-item">
+              <div class="tl-year">1977</div>
+              <div class="tl-text">STAR WARS tayang — tanpa subjudul, tanpa nomor episode.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-year">1981</div>
+              <div class="tl-text">“Episode IV — A New Hope” muncul pertama kali di layar pada penayangan ulang teatrikal.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-year">1997</div>
+              <div class="tl-text">Special Edition: Greedo menembak lebih dulu — “Han shot first” menjadi pemberontakan budaya.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-year">2004</div>
+              <div class="tl-text">DVD trilogi original: wajah Hayden Christensen disisipkan sebagai hantu Anakin di Return of the Jedi.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-year">2011</div>
+              <div class="tl-text">Blu-ray: Vader berteriak “NO!” dalam adegan penentu di The Empire Strikes Back.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-year">30 OKT 2012</div>
+              <div class="tl-text">Lucasfilm dijual kepada Disney senilai ± $4,05 miliar. Episode VII diumumkan hari yang sama.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="epilog-close rv" style="--d:.2s">
+        <p>DI SEBUAH GALAKSI JAUH, JAUH SEKALIA —<br>GALAKSI ITU TERUS BERPUTAR.<br>JAUH MELAMPAUI KENDALI SIAPA PUN YANG MENCIPATAANNYA.</p>
+      </div>
+      <div class="legal rv" style="--d:.24s">
+        Situs penggemar non-komersial. STAR WARS dan seluruh elemen terkait adalah merek dagang milik Lucasfilm Ltd. / The Walt Disney Company. Poster: IMP Awards (impawards.com). Video: YouTube — milik masing-masing pengunggah. Halaman ini disusun dalam satu berkas HTML untuk keperluan edukasi dan apresiasi.
+      </div>
+      <button class="next-link rv" type="button" data-goto="0">KEMBALI KE AWAL <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= NAVIGASI SLIDE ================= -->
+<nav id="rail" aria-label="Navigasi slide">
+  <button class="edge" id="navPrev" type="button" aria-label="Slide sebelumnya"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <div class="rail-labels" id="railLabels"></div>
+  <button class="edge" id="navNext" type="button" aria-label="Slide berikutnya"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div class="count" id="slideCount">01 / 10</div>
+</nav>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+(function(){
+'use strict';
+var $=function(s){return document.querySelector(s);};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+
+/* ============================================================
+   1. LANGIT BERBINTANG + EFEK HYPERSPACE
+   ============================================================ */
+var cv=document.getElementById('stars'),ctx=cv.getContext('2d');
+var DPR=Math.min(window.devicePixelRatio||1,2);
+var W=0,H=0,stars=[],meteors=[],meteorTimer=4;
+var warpPow=0,warpGoal=0,warpTimer=null;
+
+function resize(){
+  W=window.innerWidth;H=window.innerHeight;
+  cv.width=W*DPR;cv.height=H*DPR;
+  cv.style.width=W+'px';cv.style.height=H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  makeStars();
+}
+function makeStars(){
+  var n=Math.min(520,Math.round(W*H/4200));
+  stars=[];
+  for(var i=0;i<n;i++){
+    stars.push({
+      x:Math.random()*W,y:Math.random()*H,
+      z:.15+Math.random()*.85,
+      p:Math.random()*6.28,
+      v:.4+Math.random()*.9
+    });
+  }
+}
+function hyperspace(ms){
+  warpGoal=1;
+  clearTimeout(warpTimer);
+  warpTimer=setTimeout(function(){warpGoal=0;},ms||950);
+}
+
+var last=0;
+function frame(t){
+  var dt=Math.min(.05,(t-last)/1000||0);last=t;
+  warpPow+=(warpGoal-warpPow)*Math.min(1,dt*7);
+  ctx.clearRect(0,0,W,H);
+  var cx=W/2,cy=H/2,i,s,dx,dy,dl,nx,ny;
+
+  for(i=0;i<stars.length;i++){
+    s=stars[i];
+    dx=s.x-cx;dy=s.y-cy;dl=Math.hypot(dx,dy)||1;nx=dx/dl;ny=dy/dl;
+    if(warpPow>.02){
+      // lompatan lightspeed: bintang menjadi garis-garis cahaya
+      var v=(40+230*s.z)*warpPow*dt;
+      s.x+=nx*v;s.y+=ny*v;
+      ctx.strokeStyle='rgba(235,235,255,'+(.25+.75*s.z)+')';
+      ctx.lineWidth=Math.max(.6,s.z*1.8);
+      ctx.beginPath();
+      ctx.moveTo(s.x-nx*v*3.2,s.y-ny*v*3.2);
+      ctx.lineTo(s.x,s.y);
+      ctx.stroke();
+    }else{
+      // hanyut pelan + kelip
+      s.x-=dt*2*s.v*s.z;
+      ctx.fillStyle='rgba(230,230,245,'+(Math.abs(Math.sin(t*.001*s.v+s.p))*(.25+.75*s.z))+')';
+      var r=.4+s.z*1.15;
+      ctx.fillRect(s.x,s.y,r,r);
+    }
+    if(s.x<-5)s.x=W+5;if(s.x>W+5)s.x=-5;
+    if(s.y<-5)s.y=H+5;if(s.y>H+5)s.y=-5;
+  }
+
+  // meteor sesekali lewat (hanya saat tenang)
+  if(warpPow<.05){
+    meteorTimer-=dt;
+    if(meteorTimer<=0){
+      meteorTimer=7+Math.random()*9;
+      meteors.push({x:Math.random()*W*.9,y:-20,vx:120+Math.random()*120,vy:70+Math.random()*70,life:1});
+    }
+  }
+  for(i=meteors.length-1;i>=0;i--){
+    var m=meteors[i];
+    m.x+=m.vx*dt;m.y+=m.vy*dt;m.life-=dt*.9;
+    if(m.life<=0||m.y>H+40){meteors.splice(i,1);continue;}
+    ctx.strokeStyle='rgba(255,255,255,'+Math.min(1,m.life)*.8+')';
+    ctx.lineWidth=1.2;
+    ctx.beginPath();
+    ctx.moveTo(m.x-m.vx*.16,m.y-m.vy*.16);
+    ctx.lineTo(m.x,m.y);
+    ctx.stroke();
+  }
+  requestAnimationFrame(frame);
+}
+window.addEventListener('resize',resize);
+resize();
+requestAnimationFrame(frame);
+
+/* ============================================================
+   2. SEKUENS PEMBUKA (audio YouTube + crawl)
+   ============================================================ */
+var AUDIO_ID='_D0ZQPqeJkk';
+var CRAWL_MS=68000;
+var gate=document.getElementById('gate');
+var scene=document.getElementById('crawlScene');
+var seqT=[];
+var yt=null,ytReady=false,ytWanted=false;
+
+window.onYouTubeIframeAPIReady=function(){
+  yt=new YT.Player('ytAudio',{
+    videoId:AUDIO_ID,
+    playerVars:{autoplay:0,controls:0,disablekb:1,playsinline:1},
+    events:{
+      onReady:function(){
+        ytReady=true;
+        if(ytWanted){ytWanted=false;try{yt.unMute();yt.setVolume(90);yt.playVideo();}catch(e){}}
+      }
+    }
+  });
+};
+function audioStart(){
+  if(yt&&ytReady){try{yt.unMute();yt.setVolume(90);yt.playVideo();}catch(e){}}
+  else{ytWanted=true;}
+}
+function audioStop(){
+  if(yt&&ytReady){try{yt.stopVideo();}catch(e){}}
+  ytWanted=false;
+}
+
+function startCrawl(){
+  audioStart();
+  gate.classList.add('out');
+  setTimeout(function(){gate.remove();},850);
+  scene.hidden=false;
+  requestAnimationFrame(function(){scene.classList.add('blue-on');});
+  seqT.push(setTimeout(function(){scene.classList.remove('blue-on');},3400));
+  seqT.push(setTimeout(function(){scene.classList.add('logo-on');},4000));
+  seqT.push(setTimeout(function(){
+    scene.classList.remove('logo-on');
+    scene.classList.add('go');            // mulai teks crawl naik
+  },9400));
+  seqT.push(setTimeout(endCrawl,9400+CRAWL_MS+800));
+}
+function endCrawl(){
+  seqT.forEach(clearTimeout);seqT=[];
+  audioStop();
+  scene.classList.add('done');
+  setTimeout(function(){scene.hidden=true;},1000);
+  enterSite();
+}
+function enterSite(){
+  document.body.classList.add('ready');
+  goTo(0,true);
+  setTimeout(function(){hyperspace(1100);},250);
+}
+
+document.getElementById('btnStart').addEventListener('click',function(){
+  this.disabled=true;startCrawl();
+});
+document.getElementById('btnSkipCrawl').addEventListener('click',endCrawl);
+document.getElementById('btnSkipGate').addEventListener('click',function(){
+  audioStop();gate.remove();enterSite();
+});
+
+/* ============================================================
+   3. MESIN SLIDE
+   ============================================================ */
+var slides=$$('.slide');
+var cur=-1,navLock=false;
+var chapterLabel=$('#chapterLabel'),slideCount=$('#slideCount');
+var navPrev=$('#navPrev'),navNext=$('#navNext');
+var railLabels=document.getElementById('railLabels');
+
+slides.forEach(function(s,i){
+  var b=document.createElement('button');
+  b.type='button';b.className='rl';b.title=s.dataset.full;
+  b.innerHTML='<span class="t">'+s.dataset.label+'</span><i class="d"></i>';
+  b.addEventListener('click',function(){goTo(i);});
+  railLabels.appendChild(b);
+});
+
+function updateChrome(){
+  var s=slides[cur];
+  chapterLabel.textContent=s.dataset.full||s.dataset.label;
+  $$('.rl').forEach(function(b,i){b.classList.toggle('on',i===cur);});
+  slideCount.textContent=pad(cur+1)+' / '+pad(slides.length);
+  navPrev.disabled=cur<=0;
+  navNext.disabled=cur>=slides.length-1;
+  document.title=s.dataset.full+' — STAR WARS: Sejarah Saga';
+}
+function pad(n){return (n<10?'0':'')+n;}
+
+function activate(i){
+  if(cur>=0){
+    var old=slides[cur];
+    old.classList.remove('go','active');
+    old.scrollTop=0;
+  }
+  cur=i;
+  var el=slides[i];
+  el.classList.add('active');
+  el.scrollTop=0;
+  el.querySelectorAll('img[data-src]').forEach(armPoster); // muat poster slide ini
+  void el.offsetWidth;
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){el.classList.add('go');});
+  });
+  updateChrome();
+}
+function goTo(i,instant){
+  if(!document.body.classList.contains('ready'))return;
+  i=Math.max(0,Math.min(slides.length-1,i));
+  if(i===cur||navLock)return;
+  if(instant){activate(i);return;}
+  navLock=true;
+  hyperspace(900);                       // lompatan bintang antar slide
+  setTimeout(function(){activate(i);navLock=false;},170);
+}
+
+navPrev.addEventListener('click',function(){goTo(cur-1);});
+navNext.addEventListener('click',function(){goTo(cur+1);});
+ $$('[data-goto]').forEach(function(b){
+  b.addEventListener('click',function(){goTo(+b.getAttribute('data-goto'));});
+});
+window.addEventListener('keydown',function(e){
+  if(!document.body.classList.contains('ready'))return;
+  if(e.key==='ArrowRight')goTo(cur+1);
+  else if(e.key==='ArrowLeft')goTo(cur-1);
+});
+
+/* ============================================================
+   4. POSTER (dengan cadangan jika gambar gagal dimuat)
+   ============================================================ */
+function armPoster(img){
+  if(img.dataset.armed)return;
+  img.dataset.armed='1';
+  var list=[img.getAttribute('data-src')];
+  if(img.getAttribute('data-src-fix'))list.push(img.getAttribute('data-src-fix'));
+  if(/^http:/.test(list[0]))list.push(list[0].replace('http://','https://'));
+  var i=0;
+  img.src=list[i];
+  img.addEventListener('error',function(){
+    i++;
+    if(i<list.length){img.src=list[i];return;}
+    var fb=document.createElement('div');
+    fb.className='poster-fb';
+    fb.innerHTML='<span class="fb-num">'+img.dataset.ep+'</span>'+
+      '<span class="fb-t">'+img.dataset.fb+'</span>'+
+      '<span class="fb-s">poster tidak dapat dimuat — impawards.com</span>';
+    img.replaceWith(fb);
+  });
+}
+
+/* Kemiringan 3D halus pada poster mengikuti kursor */
+ $$('.poster-tilt').forEach(function(box){
+  box.closest('.poster-wrap').addEventListener('mousemove',function(e){
+    var r=box.getBoundingClientRect();
+    var px=(e.clientX-r.left)/r.width-.5;
+    var py=(e.clientY-r.top)/r.height-.5;
+    box.style.transform='rotateX('+(-py*7)+'deg) rotateY('+(px*9)+'deg)';
+  });
+  box.closest('.poster-wrap').addEventListener('mouseleave',function(){
+    box.style.transform='';
+  });
+});
+
+/* ============================================================
+   5. VIDEO RINGAN (iframe baru dimuat saat tombol diklik)
+   ============================================================ */
+ $$('.vembed').forEach(function(v){
+  var b=v.querySelector('.vembed-btn');
+  if(!b)return;
+  b.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+v.getAttribute('data-vid')+'?autoplay=1&rel=0';
+    f.allow='autoplay; encrypted-media; picture-in-picture';
+    f.allowFullscreen=true;
+    v.classList.add('playing');
+    v.innerHTML='';
+    v.appendChild(f);
+  });
+});
+
+/* ============================================================
+   6. TAB SINOPSIS / DI BALIK LAYAR
+   ============================================================ */
+ $$('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    var scope=t.closest('.slide');
+    scope.querySelectorAll('.tab').forEach(function(x){
+      x.classList.toggle('active',x===t);
+    });
+    scope.querySelectorAll('.panel').forEach(function(p){
+      p.classList.toggle('active',p.getAttribute('data-panel')===t.getAttribute('data-tab'));
+    });
+  });
+});
+
+})();
+</script>
+</body>
+</html>
